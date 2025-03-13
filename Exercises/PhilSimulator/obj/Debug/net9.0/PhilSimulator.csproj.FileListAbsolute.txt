@@ -1,0 +1,15 @@
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\bin\Debug\net9.0\PhilSimulator.exe
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\bin\Debug\net9.0\PhilSimulator.deps.json
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\bin\Debug\net9.0\PhilSimulator.runtimeconfig.json
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\bin\Debug\net9.0\PhilSimulator.dll
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\bin\Debug\net9.0\PhilSimulator.pdb
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\obj\Debug\net9.0\PhilSimulator.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\obj\Debug\net9.0\PhilSimulator.AssemblyInfoInputs.cache
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\obj\Debug\net9.0\PhilSimulator.AssemblyInfo.cs
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\obj\Debug\net9.0\PhilSimulator.csproj.CoreCompileInputs.cache
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\obj\Debug\net9.0\PhilSimulator.sourcelink.json
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\obj\Debug\net9.0\PhilSimulator.dll
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\obj\Debug\net9.0\refint\PhilSimulator.dll
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\obj\Debug\net9.0\PhilSimulator.pdb
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\obj\Debug\net9.0\PhilSimulator.genruntimeconfig.cache
+C:\Users\phra\DTU\02225_Distributed_Real_Time_Systems\Exercises\PhilSimulator\obj\Debug\net9.0\ref\PhilSimulator.dll
