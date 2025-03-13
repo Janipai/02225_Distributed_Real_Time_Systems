@@ -18,6 +18,9 @@ public class Program
             Console.WriteLine($"Task: {task.Name}, WCET: {task.WCET}, BCET: {task.BCET}, Period: {task.Period}, Deadline: {task.Deadline}, Priority: {task.Priority}");
         }
         
+        Simulator.PerformResponseTimeAnalysis(tasks);
+        
+        
         // Start simulation
         Simulator simulator = new Simulator(tasks, simulationTime);
         List<int> WCResponseTimes = simulator.Start();

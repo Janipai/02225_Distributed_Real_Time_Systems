@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("PhilSimulator")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1a5322b83b68c9fac8c19fb57b3a8c4f9076a28a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+58667915b6ab6752f42ac39d9b24f95eca19b9b0")]
 [assembly: System.Reflection.AssemblyProductAttribute("PhilSimulator")]
 [assembly: System.Reflection.AssemblyTitleAttribute("PhilSimulator")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
