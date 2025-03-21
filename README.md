@@ -27,10 +27,12 @@ The tool simulates RMS by reading a set of tasks from a CSV file and executing t
    ```bash
    git clone https://github.com/janipai/02225_Distributed_Real_Time-Systems.git
    cd 02225_Distributed_Real_Time-Systems
+   
 2 **Prepare the CSV Data File:**
     Ensure that the CSV file (exercise-TC1.csv) is located in the data folder as referenced in the code.
+
 3 **Build and Run the Simulator:**
-Open a terminal in the repository directory and, cd into "02225_Distributed_Real_Time_Systems/Exercises" and run:
+Open a terminal in the repository directory and, cd into ```02225_Distributed_Real_Time_Systems/Exercises``` and run:
 ```bash
     dotnet build
 ```
