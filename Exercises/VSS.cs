@@ -212,7 +212,7 @@ class Program
     static void Main()
     {
         List<Task> tasks = new List<Task>();
-        string filePath = "Exercises/data/exercise-TC1.csv";
+        string filePath = "data/exercise-TC1.csv";
         InitializeTasks(tasks, filePath);
 
         Console.WriteLine("\n=== Task Statistics ===");
