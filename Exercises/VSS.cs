@@ -1,29 +1,13 @@
+namespace _02225;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 
-class Task
+class VSS
 {
-    public string Id { get; set; } = string.Empty;
-    public int Wcet { get; set; }          
-    public int Bcet { get; set; }          
-    public int Period { get; set; }        
-    public int Deadline { get; set; }      
-    public int Priority { get; set; }      
-    public int RemainingTime { get; set; } 
-    public int ReleaseTime { get; set; }   
-    public int ResponseTime { get; set; }  
-
-    public Task()
-    {
-        ResponseTime = -1;  // Initially unknown
-    }
-}
-
-class Program
-{
-    static void InitializeTasks(List<Task> tasks, string filename)
+    public void InitializeTasks(List<Task> tasks, string filename)
     {
         using (var reader = new StreamReader(filename))
         {
@@ -107,7 +91,7 @@ class Program
     }
 
     // Main simulation function (Very Simple Simulator - VSS)
-    static void Simulate(List<Task> tasks, int simulationTime)
+    public void Simulate(List<Task> tasks, int simulationTime)
     {
         int currentTime = 0;
         Dictionary<string, int> wcrt = new Dictionary<string, int>();
@@ -158,7 +142,7 @@ class Program
     }
 
     // Response-Time Analysis (RTA) Function
-    static void ResponseTimeAnalysis(List<Task> tasks)
+    public void ResponseTimeAnalysis(List<Task> tasks)
     {
         tasks = tasks.OrderByDescending(t => t.Priority).ToList(); // Sort tasks by priority
 
@@ -207,25 +191,5 @@ class Program
                 Console.WriteLine($"- Task {taskId}");
             }
         }
-    }
-
-    static void Main()
-    {
-        List<Task> tasks = new List<Task>();
-        string filePath = "data/exercise-TC1.csv";
-        InitializeTasks(tasks, filePath);
-
-        Console.WriteLine("\n=== Task Statistics ===");
-        foreach (var task in tasks)
-        {
-            Console.WriteLine($"Task {task.Id}: WCET={task.Wcet}, BCET={task.Bcet}, Period={task.Period}, Deadline={task.Deadline}, Priority={task.Priority}");
-        }
-
-        int simulationTime = 100; // Set simulation time
-        Console.WriteLine("\n=== Running Simulation ===");
-        Simulate(tasks, simulationTime);
-
-        // Run Response-Time Analysis
-        ResponseTimeAnalysis(tasks);
     }
 }
