@@ -8,19 +8,19 @@
     "net9.0": []
   },
   "packageFolders": {
-    "C:\\Users\\phill\\.nuget\\packages\\": {}
+    "/home/shania-hau/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\phill\\DTU\\02225_Distributed_Real_Time_Systems\\Exercises\\02225.csproj",
+      "projectUniqueName": "/home/shania-hau/RiderProjects/02225_Distributed_Real_Time_Systems/Exercises/02225.csproj",
       "projectName": "02225",
-      "projectPath": "C:\\Users\\phill\\DTU\\02225_Distributed_Real_Time_Systems\\Exercises\\02225.csproj",
-      "packagesPath": "C:\\Users\\phill\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\phill\\DTU\\02225_Distributed_Real_Time_Systems\\Exercises\\obj\\",
+      "projectPath": "/home/shania-hau/RiderProjects/02225_Distributed_Real_Time_Systems/Exercises/02225.csproj",
+      "packagesPath": "/home/shania-hau/.nuget/packages/",
+      "outputPath": "/home/shania-hau/RiderProjects/02225_Distributed_Real_Time_Systems/Exercises/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\phill\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "/home/shania-hau/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net9.0"
@@ -65,7 +65,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.201/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/home/shania-hau/.dotnet/sdk/9.0.200/PortableRuntimeIdentifierGraph.json"
       }
     }
   }
