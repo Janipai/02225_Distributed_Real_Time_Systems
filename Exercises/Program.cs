@@ -4,7 +4,14 @@ public class Program
 {
     static void Main()
     {
-        List<Task> tasks = new List<Task>();
+        string part = "data/Project/1-tiny-test-case/";
+        String architectureFilePath =  part + "architecture.csv";
+        String budgetFilePath = part + "budgets.csv";
+        String tasksFilePath = part + "tasks.csv";
+        InputHandler IH = new InputHandler(architectureFilePath, budgetFilePath, tasksFilePath);
+        
+        
+        /*List<Task> tasks = new List<Task>();
         string filePath = "data/Exercise/exercise-TC1.csv";
 
         VSS vss = new VSS();
@@ -22,6 +29,6 @@ public class Program
         vss.Simulate(tasks, simulationTime);
 
         // Run Response-Time Analysis
-        vss.ResponseTimeAnalysis(tasks);
+        vss.ResponseTimeAnalysis(tasks);*/
     }
 }
