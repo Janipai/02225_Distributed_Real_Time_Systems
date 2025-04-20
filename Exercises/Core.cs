@@ -3,7 +3,7 @@
 public class Core
 {
     private string coreID { get; set; } = string.Empty;
-    private double speed { get; set; } = 0.0;
+    public double speed { get; set; } = 0.0;
     private string scheduler { get; set; } = string.Empty;
     
     

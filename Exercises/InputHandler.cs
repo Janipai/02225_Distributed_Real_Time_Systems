@@ -2,7 +2,7 @@
 
 public class InputHandler
 {
-    private CompleteCase CC = new CompleteCase(new Architecture(), new Budget(), new TaskList());
+    public CompleteCase CC = new CompleteCase(new Architecture(), new Budget(), new TaskList());
         
     public InputHandler(String arcchitectureFilePath, string budgetFilePath, string tasksFilePath)
     {
