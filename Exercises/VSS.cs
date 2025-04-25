@@ -44,7 +44,7 @@ class VSS
         tasks.Sort((a, b) => a.Period.CompareTo(b.Period));
 
         // Assign priority dynamically (lower number = higher priority)
-        for (int i = 0; i < tasks.Count; i++)
+        for (var i = 0; i < tasks.Count; i++)
         {
             tasks[i].Priority = tasks.Count - i;  // Highest priority = highest number
         }

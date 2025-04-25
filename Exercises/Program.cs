@@ -4,16 +4,16 @@ public class Program
 {
     static void Main()
     {
-        string part = "data/Project/1-tiny-test-case/";
-        String architectureFilePath =  part + "architecture.csv";
-        String budgetFilePath = part + "budgets.csv";
-        String tasksFilePath = part + "tasks.csv";
+        const string part = "data/Project/1-tiny-test-case/";
+        const string architectureFilePath = part + "architecture.csv";
+        const string budgetFilePath = part + "budgets.csv";
+        const string tasksFilePath = part + "tasks.csv";
         
-        InputHandler IH = new InputHandler(architectureFilePath, budgetFilePath, tasksFilePath);
-        CompleteCase CC = IH.CC;
+        InputHandler ih = new InputHandler(architectureFilePath, budgetFilePath, tasksFilePath);
+        CompleteCase cc = ih.Cc;
         
-        VerifyInitialization(CC);
-        RunTestSimulation(CC);
+        VerifyInitialization(cc);
+        RunTestSimulation(cc);
         
         /*List<Task> tasks = new List<Task>();
         string filePath = "data/Exercise/exercise-TC1.csv";
@@ -36,16 +36,16 @@ public class Program
         vss.ResponseTimeAnalysis(tasks);*/
     }
     
-    static void VerifyInitialization(CompleteCase CC)
+    static void VerifyInitialization(CompleteCase cc)
     {
         Console.WriteLine("\n=== Initialization Verification ===");
         
         // Check cores
-        var core = CC.GetArchitecture().getCoreFromID("Core_1");
-        Console.WriteLine($"Core loaded: {core != null} (Speed={core?.speed})");
+        var core = cc.GetArchitecture().GetCoreFromId("Core_1");
+        Console.WriteLine($"Core loaded: {core != null} (Speed={core?.Speed})");
         
         // Check component
-        var component = CC.GetBudget().getComponentFromID("Camera_Sensor");
+        var component = cc.GetBudget().GetComponentFromId("Camera_Sensor");
         Console.WriteLine($"Component created: {component != null}");
         Console.WriteLine($"Scheduler type: {component?.Scheduler?.GetType().Name}");
         
@@ -54,15 +54,15 @@ public class Program
         Console.WriteLine($"Task0 WCET (adjusted for core speed): {component?.Tasks[0].Wcet}");
     }
     
-    static void RunTestSimulation(CompleteCase CC)
+    static void RunTestSimulation(CompleteCase cc)
     {
-        var component = CC.GetBudget().getComponentFromID("Camera_Sensor");
+        var component = cc.GetBudget().GetComponentFromId("Camera_Sensor");
         var tasks = component.Tasks;
-        int simulationTime = 10; // Adjust based on your task periods
+        var simulationTime = 10; // Adjust based on your task periods
 
         Console.WriteLine("\n=== Simulation Results ===");
     
-        for (int t = 0; t < simulationTime; t++)
+        for (var t = 0; t < simulationTime; t++)
         {
             // Get the next task to run (respecting hierarchy/BDR)
             var task = component.Scheduler.GetNextTask(t);

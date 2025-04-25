@@ -3,9 +3,9 @@ namespace _02225.Scheduling_policies;
 using System.Collections.Generic;
 using System.Linq;
 
-public class EDFScheduler : IScheduler
+public class EdfScheduler : IScheduler
 {
-    private readonly List<Task> _tasks = new();
+    private readonly List<Task> _tasks = [];
     private readonly PriorityQueue<Task, int> _readyQueue = new();
 
     public void AddTask(Task task)
@@ -18,7 +18,7 @@ public class EDFScheduler : IScheduler
         UpdateReadyQueue(task.ReleaseTime); // Initial update
     }
 
-    public Task GetNextTask(int currentTime)
+    public Task? GetNextTask(int currentTime)
     {
         UpdateReadyQueue(currentTime);
         return _readyQueue.TryDequeue(out var task, out _) ? task : null;
@@ -26,7 +26,7 @@ public class EDFScheduler : IScheduler
 
     public bool IsSchedulable(List<Task> tasks)
     {
-        double utilization = tasks.Sum(t => 
+        var utilization = tasks.Sum(t => 
         {
             double denominator = t.Deadline > 0 ? t.Deadline : t.Period;
             return (double)t.Wcet / denominator;
@@ -43,7 +43,7 @@ public class EDFScheduler : IScheduler
                      t.RemainingTime > 0 && 
                      t.ReleaseTime <= currentTime))
         {
-            int absoluteDeadline = task.ReleaseTime + 
+            var absoluteDeadline = task.ReleaseTime + 
                                    (task.Deadline > 0 ? task.Deadline : task.Period);
             _readyQueue.Enqueue(task, absoluteDeadline);
         }

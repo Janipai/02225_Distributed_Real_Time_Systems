@@ -2,12 +2,12 @@
 
 public class Architecture
 {
-    private List<Core> cores = new List<Core>();
+    private readonly List<Core?> _cores = new List<Core?>();
     
-    public void AddCore(string coreID, double speed, string scheduler)
+    public void AddCore(string coreId, double speed, string scheduler)
     {
-        Core newCore = new Core(coreID, speed, scheduler);
-        cores.Add(newCore);
+        Core? newCore = new Core(coreId, speed, scheduler);
+        _cores.Add(newCore);
     }
 
     public Architecture()
@@ -17,17 +17,17 @@ public class Architecture
     public void PrintCores()
     {
         Console.WriteLine("=== Cores in Architecture ===");
-        foreach (var core in cores)
+        foreach (var core in _cores)
         {
-            Console.WriteLine(core.printCore());
+            Console.WriteLine(core?.PrintCore());
         }
     }
     
-    public Core getCoreFromID(string ID)
+    public Core? GetCoreFromId(string id)
     {
-        foreach (var core in cores)
+        foreach (var core in _cores)
         {
-            if (core.get() == ID)
+            if (core?.Get() == id)
             {
                 return core;
             }

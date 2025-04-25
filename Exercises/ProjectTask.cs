@@ -2,8 +2,8 @@
 
 public class ProjectTask : Task
 {
-    private string taskName { get; set; } = string.Empty;
-    private int wcet { get; set; } = 0;
+    private string TaskName { get; set; } = string.Empty;
+    private int Wcet { get; set; } = 0;
     private int period { get; set; } = 0;
     //private Component componentID  = new Component(string.Empty, string.Empty, 0, 0, new Core(string.Empty, 0.0, string.Empty));
     public Component AssignedComponent { get; set; }
@@ -16,7 +16,7 @@ public class ProjectTask : Task
      //   Tasks.Add(task);
      //   Scheduler?.AddTask(task); 
     //}
-    public ProjectTask(string taskName, int wcet, int period, Component component, int priority)//Component componentID, )
+    public ProjectTask(string taskName, int wcet, int period, Component? component, int priority)//Component componentID, )
     {
         //this.taskName = taskName;
         //this.wcet = wcet;
@@ -59,14 +59,14 @@ public class ProjectTask : Task
         }
 
         // 3. Apply core speed factor
-        if (AssignedComponent.core != null)
+        if (AssignedComponent.Core != null)
         {
-            Wcet = (int)Math.Ceiling(Wcet / AssignedComponent.core.speed);
+            Wcet = (int)Math.Ceiling(Wcet / AssignedComponent.Core.Speed);
         }
     }
     
-    public void printTask()
+    public void PrintTask()
     {
-        Console.WriteLine($"Task Name: {taskName}, WCET: {wcet}, Period: {period}, Component ID: {AssignedComponent.get()}, Priority: {priority}");
+        Console.WriteLine($"Task Name: {TaskName}, WCET: {Wcet}, Period: {period}, Component ID: {AssignedComponent.Get()}, Priority: {priority}");
     }
 }

@@ -2,25 +2,25 @@
 
 public class TaskList
 {
-    private List<ProjectTask> tasks = new List<ProjectTask>();
+    private List<ProjectTask> _tasks = new List<ProjectTask>();
 
     public TaskList()
     {
         
     }
 
-    public void addTask(string taskName, int wcet, int period, Component componentID, int priority)
+    public void AddTask(string taskName, int wcet, int period, Component? componentId, int priority)
     {
-        ProjectTask newTask = new ProjectTask(taskName, wcet, period, componentID, priority);
-        tasks.Add(newTask);
+        ProjectTask newTask = new ProjectTask(taskName, wcet, period, componentId, priority);
+        _tasks.Add(newTask);
     }
     
-    public void printTasks()
+    public void PrintTasks()
     {
         Console.WriteLine("=== Tasks in Task List ===");
-        foreach (var task in tasks)
+        foreach (var task in _tasks)
         {
-            task.printTask();
+            task.PrintTask();
         }
     }
     

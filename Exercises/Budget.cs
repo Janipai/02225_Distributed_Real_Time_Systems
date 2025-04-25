@@ -2,47 +2,40 @@
 
 public class Budget
 {
-    private List<Component> components = new List<Component>();
+    private List<Component?> _components = new List<Component?>();
     
     public Budget()
     {
         
     }
 
-    public void addComponent(string budgetID, string scheduler, int budget, int period, Core coreID)
+    public void AddComponent(string budgetId, string scheduler, int budget, int period, Core? coreId)
     {
         //Component newComponent = new Component(budgetID, scheduler, budget, period, coreID);
-        Component newComponent = new Component 
+        Component? newComponent = new Component 
         {
-            ComponentID = budgetID,
+            ComponentId = budgetId,
             SchedulerType = scheduler,
             Budget = budget,
             Period = period,
-            core = coreID,
-            BDR = new BoundedDelayResource((double)budget/period, period-budget)
+            Core = coreId,
+            Bdr = new BoundedDelayResource((double)budget/period, period-budget)
         };
         newComponent.InitializeScheduler();
-        components.Add(newComponent);
+        _components.Add(newComponent);
     }
     
-    public void printBudget()
+    public void PrintBudget()
     {
         Console.WriteLine("=== Budget ===");
-        foreach (var component in components)
+        foreach (var component in _components)
         {
-            Console.WriteLine(component.printComponent());
+            Console.WriteLine(component?.PrintComponent());
         }
     }
     
-    public Component getComponentFromID(string ID)
+    public Component? GetComponentFromId(string id)
     {
-        foreach (var component in components)
-        {
-            if (component.get() == ID)
-            {
-                return component;
-            }
-        }
-        return null;
+        return _components.FirstOrDefault(component => component?.Get() == id);
     }
 }
