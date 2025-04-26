@@ -2,7 +2,7 @@
 
 public class Budget
 {
-    private List<Component> components = new List<Component>();
+    List<Component> components = new List<Component>();
     
     public Budget()
     {
@@ -11,17 +11,7 @@ public class Budget
 
     public void addComponent(string budgetID, string scheduler, int budget, int period, Core coreID)
     {
-        //Component newComponent = new Component(budgetID, scheduler, budget, period, coreID);
-        Component newComponent = new Component 
-        {
-            ComponentID = budgetID,
-            SchedulerType = scheduler,
-            Budget = budget,
-            Period = period,
-            core = coreID,
-            BDR = new BoundedDelayResource((double)budget/period, period-budget)
-        };
-        newComponent.InitializeScheduler();
+        Component newComponent = new Component(budgetID, scheduler, budget, period, coreID);
         components.Add(newComponent);
     }
     
