@@ -1,4 +1,4 @@
-﻿namespace _02225;
+﻿namespace _02225.Datastructure;
 
 public class Budget
 {
@@ -21,6 +21,7 @@ public class Budget
         foreach (var component in components)
         {
             Console.WriteLine(component.printComponent());
+            component.printChildTasks();
         }
     }
     
@@ -34,5 +35,10 @@ public class Budget
             }
         }
         return null;
+    }
+    
+    public List<Component> getComponents()
+    {
+        return components;
     }
 }

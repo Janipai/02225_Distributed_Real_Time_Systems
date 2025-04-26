@@ -1,4 +1,4 @@
-﻿namespace _02225;
+﻿namespace _02225.Datastructure;
 
 public class Architecture
 {
@@ -34,6 +34,4 @@ public class Architecture
         }
         return null;
     }
-    
-    
 }

@@ -1,21 +1,29 @@
+using System.Net.Mime;
+
 namespace _02225;
 
 public class Program
 {
     static void Main()
     {
-        string part = "data/Project/1-tiny-test-case/";
-        String architectureFilePath =  part + "architecture.csv";
-        String budgetFilePath = part + "budgets.csv";
-        String tasksFilePath = part + "tasks.csv";
-        InputHandler IH = new InputHandler(architectureFilePath, budgetFilePath, tasksFilePath);
         
-        
+        string easy = "data/Project/1-tiny-test-case/";
+        string small = "data/Project/2-small-test-case/";
+        string medium = "data/Project/3-medium-test-case/";
+        String architectureFilePath =  medium + "architecture.csv";
+        String budgetFilePath = medium + "budgets.csv";
+        String tasksFilePath = medium + "tasks.csv";
+        int simulationTime = 100000;
+        InputHandler IH = new InputHandler(architectureFilePath, budgetFilePath, tasksFilePath, simulationTime);
+        MainController mc = new MainController(IH.CC);
+        mc.start();
+
+
         /*List<Task> tasks = new List<Task>();
         string filePath = "data/Exercise/exercise-TC1.csv";
 
         VSS vss = new VSS();
-        
+
         vss.InitializeTasks(tasks, filePath);
 
         Console.WriteLine("\n=== Task Statistics ===");

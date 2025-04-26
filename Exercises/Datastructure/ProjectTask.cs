@@ -1,4 +1,4 @@
-﻿namespace _02225;
+﻿namespace _02225.Datastructure;
 
 public class ProjectTask
 {
@@ -9,17 +9,45 @@ public class ProjectTask
     private int priority { get; set; } = 0;
     
     
-    public ProjectTask(string taskName, int wcet, int period, Component componentID, int priority)
+    public ProjectTask(string taskName, int wcet, int period, Component componentID, string priority)
     {
         this.taskName = taskName;
         this.wcet = wcet;
         this.period = period;
         this.componentID = componentID;
-        this.priority = priority;
+        
+        if(componentID.getScheduler() == "RM")
+        {
+            this.priority = int.Parse(priority);
+        }
+        else
+        {
+            this.priority = 0;
+        }
     }
+
     
     public void printTask()
     {
         Console.WriteLine($"Task Name: {taskName}, WCET: {wcet}, Period: {period}, Component ID: {componentID.get()}, Priority: {priority}");
+    }
+    
+    public int getPriority()
+    {
+        return priority;
+    }
+    public int getPeriod()
+    {
+        return period;
+    }
+    
+    public int getWcet()
+    {
+        return wcet;
+    }
+    
+    public string getName()
+    {
+        return taskName;
     }
 }

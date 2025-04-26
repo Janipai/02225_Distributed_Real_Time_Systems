@@ -1,4 +1,4 @@
-﻿namespace _02225;
+﻿namespace _02225.Datastructure;
 
 public class TaskList
 {
@@ -9,10 +9,11 @@ public class TaskList
         
     }
 
-    public void addTask(string taskName, int wcet, int period, Component componentID, int priority)
+    public ProjectTask addTask(string taskName, int wcet, int period, Component componentID, string priority)
     {
         ProjectTask newTask = new ProjectTask(taskName, wcet, period, componentID, priority);
         tasks.Add(newTask);
+        return newTask;
     }
     
     public void printTasks()
@@ -22,6 +23,11 @@ public class TaskList
         {
             task.printTask();
         }
+    }
+    
+    public List<ProjectTask> getTasks()
+    {
+        return tasks;
     }
     
 }

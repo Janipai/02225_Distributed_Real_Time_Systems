@@ -1,4 +1,4 @@
-﻿namespace _02225;
+﻿namespace _02225.Datastructure;
 
 public class Component
 {
@@ -7,6 +7,8 @@ public class Component
     private int Budget { get; set; } = 0;
     private int Period { get; set; } = 0;
     private Core core { get; set; } = new Core(string.Empty, 0.0, string.Empty);
+    
+    private List<ProjectTask> childTasks  = new List<ProjectTask>();
 
     public Component(string componentId, string scheduler, int budget, int period, Core coreID)
     {
@@ -17,6 +19,24 @@ public class Component
         core = coreID;
         
     }
+    public void addChildTask(ProjectTask newTask)
+    {
+        childTasks.Add(newTask);
+    }
+    
+    public List<ProjectTask> getChildTasks()
+    {
+        return childTasks;
+    }
+    
+    public void printChildTasks()
+    {
+        Console.WriteLine("=== Child Tasks in Component ===");
+        foreach (var task in childTasks)
+        {
+            task.printTask();
+        }
+    }
     
     public string printComponent()
     {
@@ -25,5 +45,20 @@ public class Component
     public string get()
     {
         return ComponentID;
+    }
+    
+    public int getPeriod()
+    {
+        return Period;
+    }
+    
+    public Core getCore() 
+    {
+        return core;
+    }
+
+    public string getScheduler()
+    {
+        return Scheduler;
     }
 }
