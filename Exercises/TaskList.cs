@@ -2,7 +2,7 @@
 
 public class TaskList
 {
-    private List<ProjectTask> tasks = new List<ProjectTask>();
+    List<ProjectTask> tasks = new List<ProjectTask>();
 
     public TaskList()
     {
