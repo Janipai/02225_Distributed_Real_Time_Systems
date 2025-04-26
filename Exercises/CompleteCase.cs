@@ -2,9 +2,9 @@
 
 public class CompleteCase
 {
-    private Architecture _architecture;
-    private Budget _budget;
-    private TaskList _taskList;
+    private readonly Architecture _architecture;
+    private readonly Budget _budget;
+    private readonly TaskList _taskList;
 
     public CompleteCase(Architecture architecture, Budget budget, TaskList taskList)
     {
