@@ -2,38 +2,38 @@
 
 public class CompleteCase
 {
-    private Architecture Architecture;
-    private Budget Budget;
-    private TaskList TaskList;
+    private Architecture _architecture;
+    private Budget _budget;
+    private TaskList _taskList;
 
     public CompleteCase(Architecture architecture, Budget budget, TaskList taskList)
     {
-        this.Architecture = architecture;
-        this.Budget = budget;
-        this.TaskList = taskList;
+        this._architecture = architecture;
+        this._budget = budget;
+        this._taskList = taskList;
     }
 
     public Architecture GetArchitecture()
     {
-        return Architecture;
+        return _architecture;
     }
     
     public Budget GetBudget()
     {
-        return Budget;
+        return _budget;
     }
 
     public TaskList GetTaskList()
     {
-        return TaskList;
+        return _taskList;
     }
     
     public void PrintCompleteCase()
     {
         Console.WriteLine("=== Complete Case ===");
-        Architecture.PrintCores();
-        Budget.PrintBudget();
-        TaskList.PrintTasks();
+        _architecture.PrintCores();
+        _budget.PrintBudget();
+        _taskList.PrintTasks();
         
     }
     
