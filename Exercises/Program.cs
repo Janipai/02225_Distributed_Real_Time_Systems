@@ -5,9 +5,9 @@ public class Program
     static void Main()
     {
         string part = "data/Project/1-tiny-test-case/";
-        String architectureFilePath =  part + "architecture.csv";
-        String budgetFilePath = part + "budgets.csv";
-        String tasksFilePath = part + "tasks.csv";
+        string architectureFilePath =  part + "architecture.csv";
+        string budgetFilePath = part + "budgets.csv";
+        string tasksFilePath = part + "tasks.csv";
         InputHandler ih = new InputHandler(architectureFilePath, budgetFilePath, tasksFilePath);
         
         
