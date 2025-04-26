@@ -9,30 +9,23 @@ public class Budget
         
     }
 
-    public void addComponent(string budgetID, string scheduler, int budget, int period, Core coreID)
+    public void AddComponent(string budgetId, string scheduler, int budget, int period, Core coreId)
     {
-        Component newComponent = new Component(budgetID, scheduler, budget, period, coreID);
+        Component newComponent = new Component(budgetId, scheduler, budget, period, coreId);
         components.Add(newComponent);
     }
     
-    public void printBudget()
+    public void PrintBudget()
     {
         Console.WriteLine("=== Budget ===");
         foreach (var component in components)
         {
-            Console.WriteLine(component.printComponent());
+            Console.WriteLine(component.PrintComponent());
         }
     }
     
-    public Component getComponentFromID(string ID)
+    public Component? GetComponentFromId(string id)
     {
-        foreach (var component in components)
-        {
-            if (component.get() == ID)
-            {
-                return component;
-            }
-        }
-        return null;
+        return components.FirstOrDefault(component => component.Get() == id);
     }
 }

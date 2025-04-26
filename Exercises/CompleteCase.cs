@@ -28,12 +28,12 @@ public class CompleteCase
         return TaskList;
     }
     
-    public void printComepleteCase()
+    public void PrintCompleteCase()
     {
         Console.WriteLine("=== Complete Case ===");
         Architecture.PrintCores();
-        Budget.printBudget();
-        TaskList.printTasks();
+        Budget.PrintBudget();
+        TaskList.PrintTasks();
         
     }
     

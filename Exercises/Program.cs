@@ -8,7 +8,7 @@ public class Program
         String architectureFilePath =  part + "architecture.csv";
         String budgetFilePath = part + "budgets.csv";
         String tasksFilePath = part + "tasks.csv";
-        InputHandler IH = new InputHandler(architectureFilePath, budgetFilePath, tasksFilePath);
+        InputHandler ih = new InputHandler(architectureFilePath, budgetFilePath, tasksFilePath);
         
         
         /*List<Task> tasks = new List<Task>();

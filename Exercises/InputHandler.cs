@@ -2,20 +2,20 @@
 
 public class InputHandler
 {
-    private CompleteCase CC = new CompleteCase(new Architecture(), new Budget(), new TaskList());
+    private CompleteCase _cc = new CompleteCase(new Architecture(), new Budget(), new TaskList());
         
-    public InputHandler(String arcchitectureFilePath, string budgetFilePath, string tasksFilePath)
+    public InputHandler(String architectureFilePath, string budgetFilePath, string tasksFilePath)
     {
         
         Console.WriteLine("Starting InputHandler...");
         Console.WriteLine("Loading architecture data...");
-        LoadArchitectureData(arcchitectureFilePath);
+        LoadArchitectureData(architectureFilePath);
         Console.WriteLine("Loading budget data...");
         LoadBudgetData(budgetFilePath);
         Console.WriteLine("Loading tasks data...");
         LoadTaskData(tasksFilePath);
         Console.WriteLine("Done loading, showing result...");
-        CC.printComepleteCase();
+        _cc.PrintCompleteCase();
     }
 
 
@@ -34,7 +34,7 @@ public class InputHandler
                     continue;
                 }
                 var tokens = line.Split(',');
-                CC.GetArchitecture().AddCore(tokens[0], double.Parse(tokens[1]), tokens[2]);
+                _cc.GetArchitecture().AddCore(tokens[0], double.Parse(tokens[1]), tokens[2]);
                 
             }
         }
@@ -57,9 +57,9 @@ public class InputHandler
                     continue;
                 }
                 var tokens = line.Split(',');
-                CC.GetBudget().addComponent(
+                _cc.GetBudget().AddComponent(
                     tokens[0], tokens[1], int.Parse(tokens[2]), 
-                    int.Parse(tokens[3]), CC.GetArchitecture().getCoreFromID(tokens[4]));
+                    int.Parse(tokens[3]), _cc.GetArchitecture().GetCoreFromId(tokens[4]));
 
             }
         }
@@ -81,9 +81,9 @@ public class InputHandler
                     continue;
                 }
                 var tokens = line.Split(',');
-                CC.GetTaskList().addTask(
+                _cc.GetTaskList().AddTask(
                     tokens[0], int.Parse(tokens[1]), int.Parse(tokens[2]),
-                    CC.GetBudget().getComponentFromID(tokens[3]), int.Parse(tokens[4]));
+                    _cc.GetBudget().GetComponentFromId(tokens[3]), int.Parse(tokens[4]));
 
             }
         }

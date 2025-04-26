@@ -2,24 +2,24 @@
 
 public class ProjectTask
 {
-    private string taskName { get; set; } = string.Empty;
-    private int wcet { get; set; } = 0;
-    private int period { get; set; } = 0;
-    private Component componentID  = new Component(string.Empty, string.Empty, 0, 0, new Core(string.Empty, 0.0, string.Empty));
-    private int priority { get; set; } = 0;
+    private string TaskName { get; set; }
+    private int Wcet { get; set; }
+    private int Period { get; set; }
+    private Component _componentId;
+    private int Priority { get; set; } = 0;
     
     
-    public ProjectTask(string taskName, int wcet, int period, Component componentID, int priority)
+    public ProjectTask(string taskName, int wcet, int period, Component componentId, int priority)
     {
-        this.taskName = taskName;
-        this.wcet = wcet;
-        this.period = period;
-        this.componentID = componentID;
-        this.priority = priority;
+        this.TaskName = taskName;
+        this.Wcet = wcet;
+        this.Period = period;
+        this._componentId = componentId;
+        this.Priority = priority;
     }
     
-    public void printTask()
+    public void PrintTask()
     {
-        Console.WriteLine($"Task Name: {taskName}, WCET: {wcet}, Period: {period}, Component ID: {componentID.get()}, Priority: {priority}");
+        Console.WriteLine($"Task Name: {TaskName}, WCET: {Wcet}, Period: {Period}, Component ID: {_componentId.Get()}, Priority: {Priority}");
     }
 }
