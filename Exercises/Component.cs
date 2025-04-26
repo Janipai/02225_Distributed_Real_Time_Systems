@@ -1,29 +1,19 @@
 ﻿namespace _02225;
 
-public class Component
+public class Component(string componentId, string scheduler, int budget, int period, Core coreId)
 {
-    private string ComponentID { get; set; } = string.Empty;
-    private string Scheduler { get; set; } = string.Empty;
-    private int Budget { get; set; } = 0;
-    private int Period { get; set; } = 0;
-    private Core core { get; set; } = new Core(string.Empty, 0.0, string.Empty);
+    private string ComponentId { get; set; } = componentId;
+    private string Scheduler { get; set; } = scheduler;
+    private int Budget { get; set; } = budget;
+    private int Period { get; set; } = period;
+    private Core Core { get; set; } = coreId;
 
-    public Component(string componentId, string scheduler, int budget, int period, Core coreID)
+    public string PrintComponent()
     {
-        ComponentID = componentId;
-        Scheduler = scheduler;
-        Budget = budget;
-        Period = period;
-        core = coreID;
-        
+        return $"Component ID: {ComponentId}, Scheduler: {Scheduler}, Budget Total: {Budget}, Period: {Period}, Core ID: {Core.Get()}";
     }
-    
-    public string printComponent()
+    public string Get()
     {
-        return $"Component ID: {ComponentID}, Scheduler: {Scheduler}, Budget Total: {Budget}, Period: {Period}, Core ID: {core.get()}";
-    }
-    public string get()
-    {
-        return ComponentID;
+        return ComponentId;
     }
 }
