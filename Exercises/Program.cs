@@ -1,3 +1,5 @@
+using _02225.Entities;
+
 namespace _02225;
 
 public class Program

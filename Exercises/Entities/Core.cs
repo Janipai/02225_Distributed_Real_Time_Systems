@@ -1,4 +1,4 @@
-﻿namespace _02225;
+﻿namespace _02225.Entities;
 
 public class Core
 {

@@ -1,4 +1,4 @@
-﻿namespace _02225;
+﻿namespace _02225.Entities;
 
 public class Component(string componentId, string scheduler, int budget, int period, Core coreId)
 {
