@@ -17,7 +17,7 @@ public class MainController
         
     }
     
-    public void start()
+    public void Start()
     {
         Console.WriteLine("Starting MainController...");
         _rta.RunRta();
