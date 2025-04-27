@@ -5,23 +5,25 @@ namespace _02225;
 public class MainController
 {
     private CompleteCase _cc;
-    private Rta _rta;
     private Scheduler _scheduler;
+    private AnalysisTool _analysisTool;
     
     
     public MainController(CompleteCase cc)
     {
         this._cc = cc;
-        this._rta = new Rta(cc);
         this._scheduler = new Scheduler(cc);
+        this._analysisTool = new AnalysisTool(cc);
         
     }
     
     public void Start()
     {
         Console.WriteLine("Starting MainController...");
-        _rta.RunRta();
         _scheduler.RunScheduler();
+        
+        Console.WriteLine("\nRunning Analysis Tool...");
+        _analysisTool.RunAnalysis();
     }
     
     
