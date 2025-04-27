@@ -1,10 +1,13 @@
-﻿namespace _02225.Entities;
+﻿using System.Globalization;
+using System.Net.NetworkInformation;
+using _02225.Entities;
+namespace _02225;
 
 public class InputHandler
 {
-    private CompleteCase _cc = new CompleteCase(new Architecture(), new Budget(), new TaskList());
+    public CompleteCase Cc = new CompleteCase(new Architecture(), new Budget(), new TaskList(), 0);
         
-    public InputHandler(String architectureFilePath, string budgetFilePath, string tasksFilePath)
+    public InputHandler(String architectureFilePath, string budgetFilePath, string tasksFilePath, int simulationTime)
     {
         
         Console.WriteLine("Starting InputHandler...");
@@ -15,7 +18,8 @@ public class InputHandler
         Console.WriteLine("Loading tasks data...");
         LoadTaskData(tasksFilePath);
         Console.WriteLine("Done loading, showing result...");
-        _cc.PrintCompleteCase();
+        Cc.SetSimulationTime(simulationTime);
+        Cc.PrintCompleteCase();
     }
 
 
@@ -34,7 +38,7 @@ public class InputHandler
                     continue;
                 }
                 var tokens = line.Split(',');
-                _cc.GetArchitecture().AddCore(tokens[0], double.Parse(tokens[1]), tokens[2]);
+                Cc.GetArchitecture().AddCore(tokens[0], Convert.ToSingle(tokens[1], CultureInfo.InvariantCulture.NumberFormat), tokens[2]);
                 
             }
         }
@@ -57,9 +61,9 @@ public class InputHandler
                     continue;
                 }
                 var tokens = line.Split(',');
-                _cc.GetBudget().AddComponent(
+                Cc.GetBudget().AddComponent(
                     tokens[0], tokens[1], int.Parse(tokens[2]), 
-                    int.Parse(tokens[3]), _cc.GetArchitecture().GetCoreFromId(tokens[4]));
+                    int.Parse(tokens[3]), Cc.GetArchitecture().GetCoreFromId(tokens[4]));
 
             }
         }
@@ -81,10 +85,12 @@ public class InputHandler
                     continue;
                 }
                 var tokens = line.Split(',');
-                _cc.GetTaskList().AddTask(
+                var temp = Cc.GetTaskList().AddTask(
                     tokens[0], int.Parse(tokens[1]), int.Parse(tokens[2]),
-                    _cc.GetBudget().GetComponentFromId(tokens[3]), int.Parse(tokens[4]));
-
+                    Cc.GetBudget().GetComponentFromId(tokens[3]), tokens[4]);
+                
+                var comp = Cc.GetBudget().GetComponentFromId(tokens[3]);
+                comp.AddChildTask(temp);
             }
         }
         

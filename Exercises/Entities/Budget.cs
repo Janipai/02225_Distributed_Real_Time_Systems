@@ -9,7 +9,7 @@ public class Budget
         
     }
 
-    public void AddComponent(string budgetId, string scheduler, int budget, int period, Core coreId)
+    public void AddComponent(string budgetId, string scheduler, int budget, int period, Core? coreId)
     {
         Component newComponent = new Component(budgetId, scheduler, budget, period, coreId);
         components.Add(newComponent);
@@ -21,6 +21,7 @@ public class Budget
         foreach (var component in components)
         {
             Console.WriteLine(component.PrintComponent());
+            component.PrintComponent();
         }
     }
     
@@ -28,4 +29,10 @@ public class Budget
     {
         return components.FirstOrDefault(component => component.Get() == id);
     }
+    
+    public List<Component> GetComponents()
+    {
+        return components;
+    }
+    
 }
