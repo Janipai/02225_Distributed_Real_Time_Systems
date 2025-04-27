@@ -2,10 +2,10 @@
 
 public class ProjectTask
 {
-    private string TaskName { get; set; }
-    private int Wcet { get; set; }
-    private int Period { get; set; }
-    private Component _componentId;
+    public string TaskName { get; set; }
+    public int Wcet { get; set; }
+    public  int Period { get; set; }
+    public Component ComponentId;
     private int Priority { get; set; }
     
     public ProjectTask(string taskName, int wcet, int period, Component componentId, string priority)
@@ -13,7 +13,7 @@ public class ProjectTask
         this.TaskName = taskName;
         this.Wcet = wcet;
         this.Period = period;
-        this._componentId = componentId;
+        this.ComponentId = componentId;
         
         if(componentId.GetScheduler() == "RM")
         {
@@ -27,7 +27,7 @@ public class ProjectTask
     
     public void PrintTask()
     {
-        Console.WriteLine($"Task Name: {TaskName}, WCET: {Wcet}, Period: {Period}, Component ID: {_componentId.Get()}, Priority: {Priority}");
+        Console.WriteLine($"Task Name: {TaskName}, WCET: {Wcet}, Period: {Period}, Component ID: {ComponentId.Get()}, Priority: {Priority}");
     }
     
     public int GetPriority()
