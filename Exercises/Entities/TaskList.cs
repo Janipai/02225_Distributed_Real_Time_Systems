@@ -1,4 +1,4 @@
-﻿namespace _02225;
+﻿namespace _02225.Entities;
 
 public class TaskList
 {
@@ -9,10 +9,11 @@ public class TaskList
         
     }
 
-    public void AddTask(string taskName, int wcet, int period, Component componentId, int priority)
+    public ProjectTask AddTask(string taskName, int wcet, int period, Component componentId, string priority)
     {
         ProjectTask newTask = new ProjectTask(taskName, wcet, period, componentId, priority);
         _tasks.Add(newTask);
+        return newTask;
     }
     
     public void PrintTasks()
@@ -22,6 +23,11 @@ public class TaskList
         {
             task.PrintTask();
         }
+    }
+
+    public List<ProjectTask> GetTasks()
+    {
+        return _tasks;
     }
     
 }
