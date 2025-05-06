@@ -76,8 +76,90 @@ public class AnalysisTool
                 $" (total α = {totalAlpha:F2})"
             );
         }
+
+        // per-task analysis Worst-Case Response Time (WCRT) analysis
+        ComputeWcrtPerTask(compInterfaces);
     }
 
+    // Helper: Compute WCRT for each task in the system
+    private void ComputeWcrtPerTask(Dictionary<Component, (double alpha, double delta)> compIfs)
+    {
+        Console.WriteLine("\n Worst-Case Response Times (WCRT) per task:");
+        foreach (Component comp in caseData.Budget.GetComponents())
+        {
+            List<ProjectTask> tasks = GetTasksForComponent(comp);
+            if (tasks.Count == 0)
+            {
+                Console.WriteLine($"Component {comp.ComponentId}: No tasks to analyze.");
+                continue;
+            }
+
+            var (alpha, delta) = compIfs[comp];
+            Console.WriteLine($"\nComponent {comp.ComponentId}  (α={alpha:F2}, Δ={delta:F2})  [{comp.Scheduler}]");
+
+            // Order tasks for deterministic output
+            tasks = comp.Scheduler.Equals("RM", StringComparison.OrdinalIgnoreCase)
+                        ? tasks.OrderBy(t => t.GetPriority()).ToList()
+                        : tasks.OrderBy(t => t.Period).ToList();
+            
+            foreach (var t in tasks)
+            {
+                // Compute WCRT for this task
+                double wcrt = 0.0;
+                if (comp.Scheduler.Equals("RM", StringComparison.OrdinalIgnoreCase))
+                {
+                    // RM analysis
+                    wcrt = ComputeWcrtRm(t, tasks, alpha, delta);
+                }
+                else
+                {
+                    // EDF analysis
+                    wcrt = ComputeWcrtEdf(t, tasks, alpha, delta);
+                }
+                
+                // Store the WCRT in the task object
+                t.Wcrt = wcrt;
+                
+                // Print the result
+                string status = (wcrt > t.Period) ? "MISS deadline!" : "meets deadline";
+                Console.WriteLine($"Task {t.TaskName}: WCRT = {wcrt:F2}, Deadline = {t.Period}, " +
+                                  $"{status} (α={alpha:F2}, Δ={delta:F2})");
+            }
+        }
+    }
+
+    // ---------- EDF WCRT (Guan & Yi style, scaled by α,Δ) -------------------
+    private double ComputeWcrtEdf(ProjectTask task, List<ProjectTask> all, double alpha, double delta)
+    {
+        // Identify tasks with equal or shorter deadlines (EDF interference set)
+        var interferers = all.Where(t => t != task && t.Period <= task.Period).ToList();
+        double Rprev = -1, R = task.Wcet;
+        for (int iter = 0; iter < 1000 && Math.Abs(R - Rprev) > 1e-6; iter++)
+        {
+            Rprev = R;
+            double demand = task.Wcet +
+                            interferers.Sum(t => Math.Ceiling(R / t.Period) * t.Wcet);
+            R = delta + demand / alpha;
+            if (R > task.Period) break;  // miss
+        }
+        return R;
+    }
+
+    // ---------- Rate‑Monotonic WCRT (scaled by α,Δ) -------------------------
+    private double ComputeWcrtRm(ProjectTask task, List<ProjectTask> all, double alpha, double delta)
+    {
+        var hp = all.Where(t => t.GetPriority() < task.GetPriority()).ToList();
+        double Rprev = -1, R = task.Wcet;
+        for (int iter = 0; iter < 1000 && Math.Abs(R - Rprev) > 1e-6; iter++)
+        {
+            Rprev = R;
+            double demand = task.Wcet +
+                            hp.Sum(t => Math.Ceiling(R / t.Period) * t.Wcet);
+            R = delta + demand / alpha;
+            if (R > task.Period) break;
+        }
+        return R;
+    }
     // Helper: retrieve all tasks that belong to a given component
     private List<ProjectTask> GetTasksForComponent(Component comp)
     {
