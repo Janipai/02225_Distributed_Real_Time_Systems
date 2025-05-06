@@ -15,7 +15,7 @@ public class Program
         int simulationTime = 100000;
         InputHandler ih = new InputHandler(architectureFilePath, budgetFilePath, tasksFilePath, simulationTime);
         MainController mc = new MainController(ih.Cc);
-        mc.start();
+        mc.Start();
         
         
         /*List<Task> tasks = new List<Task>();

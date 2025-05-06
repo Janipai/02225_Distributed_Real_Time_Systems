@@ -24,4 +24,9 @@ public class Architecture
     {
         return cores.FirstOrDefault(core => core.Get() == id);
     }
+    
+    public List<Core> GetCores()
+    {
+        return cores;
+    }
 }

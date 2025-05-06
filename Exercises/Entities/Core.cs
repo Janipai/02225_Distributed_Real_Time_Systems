@@ -2,19 +2,19 @@
 
     public class Core
     {
-        private string CoreId { get; set; }
-        private readonly double _speed;
-        private readonly string _scheduler;
+        public string CoreId { get; set; }
+        public readonly double Speed;
+        public readonly string Scheduler;
 
         public Core(string coreId, double speed, string scheduler)
         {
             this.CoreId = coreId;
-            this._speed = speed;
-            this._scheduler = scheduler;
+            this.Speed = speed;
+            this.Scheduler = scheduler;
         }
 
-        public string PrintCore() => $"Core ID: {CoreId}, Speed: {_speed} multiplier, Scheduler: {_scheduler}";
+        public string PrintCore() => $"Core ID: {CoreId}, Speed: {Speed} multiplier, Scheduler: {Scheduler}";
         public string Get() => CoreId;
-        public string GetScheduler() => _scheduler;
-        public double GetSpeed() => _speed;
+        public string GetScheduler() => Scheduler;
+        public double GetSpeed() => Speed;
     }

@@ -1,14 +1,28 @@
 ﻿namespace _02225.Entities;
 
-public class Component(string componentId, string scheduler, int budget, int period, Core? coreId)
+public class Component
 {
-    private string ComponentId { get; set; } = componentId;
-    private string Scheduler { get; set; } = scheduler;
-    private int Budget { get; set; } = budget;
-    private int Period { get; set; } = period;
-    private Core? Core { get; set; } = coreId;
+    public string ComponentId { get; set; }
+    public string Scheduler { get; set; }
+    public int Budget { get; set; }
+    public int Period { get; set; }
+    public Core? Core { get; set; }
     
-    private List<ProjectTask> _childTasks  = new List<ProjectTask>();
+    private readonly List<ProjectTask> _childTasks = new();
+    public IReadOnlyList<ProjectTask>  ChildTasks  => _childTasks.AsReadOnly();
+    
+    public Component(string componentId,
+        string scheduler,
+        int    budget,
+        int    period,
+        Core   core)
+    {
+        ComponentId = componentId;
+        Scheduler   = scheduler;
+        Budget      = budget;
+        Period      = period;
+        Core        = core;
+    }
     
     public void AddChildTask(ProjectTask newTask)
     {
