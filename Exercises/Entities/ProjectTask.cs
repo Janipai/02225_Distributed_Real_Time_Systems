@@ -7,6 +7,10 @@ public class ProjectTask
     public  int Period { get; set; }
     public Component ComponentId;
     private int Priority { get; set; }
+
+    public double Wcrt { get; set; } = 0.0;   // set by AnalysisTool
+    public bool MissesDeadline => Wcrt > Period;
+        
     
     public ProjectTask(string taskName, int wcet, int period, Component componentId, string priority)
     {
