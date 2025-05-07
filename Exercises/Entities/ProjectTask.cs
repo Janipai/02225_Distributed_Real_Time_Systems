@@ -11,6 +11,8 @@ public class ProjectTask
     public double Wcrt { get; set; } = 0.0;   // set by AnalysisTool
     public bool MissesDeadline => Wcrt > Period;
         
+    // Adding communication dependencies
+    public List<(ProjectTask DependentTask, int Delay)> Dependencies { get; set; } = new(); 
     
     public ProjectTask(string taskName, int wcet, int period, Component componentId, string priority)
     {
