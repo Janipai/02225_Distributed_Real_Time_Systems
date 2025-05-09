@@ -155,7 +155,7 @@ public class AnalysisTool
         }
 
         // per-task analysis Worst-Case Response Time (WCRT) analysis
-        ComputeWcrtPerTask(compInterface);
+        //ComputeWcrtPerTask(compInterface); doesn't work
     }
     
     // Helper: Compute WCRT for each task in the system
