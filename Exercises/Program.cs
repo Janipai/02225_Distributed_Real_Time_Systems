@@ -9,9 +9,9 @@ public class Program
         string easy = "data/Project/1-tiny-test-case/";
         string small = "data/Project/2-small-test-case/";
         string medium = "data/Project/3-medium-test-case/";
-        string architectureFilePath =  medium + "architecture.csv";
-        string budgetFilePath = medium + "budgets.csv";
-        string tasksFilePath = medium + "tasks.csv";
+        string architectureFilePath =  small + "architecture.csv";
+        string budgetFilePath = small + "budgets.csv";
+        string tasksFilePath = small + "tasks.csv";
         int simulationTime = 100000;
         InputHandler ih = new InputHandler(architectureFilePath, budgetFilePath, tasksFilePath, simulationTime);
         MainController mc = new MainController(ih.Cc);
