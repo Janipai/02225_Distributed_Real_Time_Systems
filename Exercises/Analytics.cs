@@ -89,6 +89,9 @@ public class AnalysisTool
             );
         }
         
+        // per-task analysis Worst-Case Response Time (WCRT) analysis
+        ComputeWcrtPerTask(compInterfaces);
+        
         Console.WriteLine("\nSummary Comparison (per Component):");
         Console.WriteLine("Component | BDR (α,Δ) | PRM (Θ/Φ) | EDP Sched | EDP Util");
         
@@ -102,10 +105,6 @@ public class AnalysisTool
 
             Console.WriteLine($"{comp.ComponentId,-10} | (α={alpha:F2}, Δ={delta:F2}) | Θ={theta:F2}/Φ={phi:F2} | {(edpSchedulable ? "Yes" : "No"),-10} | {edpUtil:F2}");
         }
-
-
-        // per-task analysis Worst-Case Response Time (WCRT) analysis
-        ComputeWcrtPerTask(compInterfaces);
     }
 
     // Helper: Compute WCRT for each task in the system
