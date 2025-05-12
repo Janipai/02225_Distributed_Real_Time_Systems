@@ -45,6 +45,18 @@ public class AnalysisTool
 
             // Print the component’s interface, formatted to two decimal places
             Console.WriteLine($"Component {comp.ComponentId}: (α, Δ) = ({alpha:F2}, {delta:F2})");
+            
+            // ---- PRM CHECK: assuming a fixed period Π for PRM ----
+            double prmPeriod = tasks.Min(t => t.Period);  // conservative
+            double prmBudget = alpha * prmPeriod;
+
+            bool prmSchedulable = IsSchedulableWithPRM(tasks, prmPeriod, prmBudget);
+            Console.WriteLine($"  PRM (Π={prmPeriod}, Θ={prmBudget:F2}): " +
+                              (prmSchedulable ? "Schedulable" : "Not Schedulable"));
+            
+            // --- EDP CHECK ---
+            bool edpSchedulable = IsDemandSchedulable(tasks, 1.0, 0.0); // EDF on full processor
+            Console.WriteLine($"  EDP (full EDF test): " + (edpSchedulable ? "Schedulable" : "Not Schedulable"));
         }
 
         Console.WriteLine(); // blank line
@@ -76,9 +88,23 @@ public class AnalysisTool
                 $" (total α = {totalAlpha:F2})"
             );
         }
-
+        
         // per-task analysis Worst-Case Response Time (WCRT) analysis
         ComputeWcrtPerTask(compInterfaces);
+        
+        Console.WriteLine("\nSummary Comparison (per Component):");
+        Console.WriteLine("Component | BDR (α,Δ) | PRM (Θ/Φ) | EDP Sched | EDP Util");
+        
+        foreach (var comp in compInterfaces.Keys)
+        {
+            var (alpha, delta) = compInterfaces[comp];
+            var tasks = GetTasksForComponent(comp);
+            var (phi, theta) = ComputeComponentPRMInterface(tasks);
+            bool edpSchedulable = IsDemandSchedulable(tasks, 1.0, 0.0);
+            var edpUtil = CalculateUtilizationForEDPTasks(tasks);
+
+            Console.WriteLine($"{comp.ComponentId,-10} | (α={alpha:F2}, Δ={delta:F2}) | Θ={theta:F2}/Φ={phi:F2} | {(edpSchedulable ? "Yes" : "No"),-10} | {edpUtil:F2}");
+        }
     }
 
     // Helper: Compute WCRT for each task in the system
@@ -170,7 +196,7 @@ public class AnalysisTool
     }
 
     // Helper: Compute the demand bound function for a task set at time t
-    private double ComputeDbf(List<ProjectTask> tasks, double t)
+    private double ComputeDBF(List<ProjectTask> tasks, double t)
     {
         double demand = 0.0;
         foreach (ProjectTask task in tasks)
@@ -243,6 +269,49 @@ public class AnalysisTool
         return (bestAlpha, bestDelta);
     }
 
+    private (double phi, double theta) ComputeComponentPRMInterface(List<ProjectTask> tasks)
+    {
+        // 1. Choose a conservative resource period Φ (e.g., minimum task period)
+        double phi = tasks.Min(t => t.Period);
+
+        // 2. Set search bounds for budget Θ: from total utilization * Φ up to Φ
+        double util = tasks.Sum(t => (double)t.Wcet / t.Period);
+        double lo = Math.Max(0.1, util * phi);  // start just above 0, or util*phi
+        double hi = phi;
+
+        // 3. Binary search for the minimal Θ such that PRM is schedulable
+        double bestTheta = hi;
+        const double eps = 1e-3;
+
+        while (hi - lo > eps)
+        {
+            double mid = (lo + hi) / 2.0;
+            bool schedulable = IsSchedulableWithPRM(tasks, phi, mid);
+            if (schedulable)
+            {
+                bestTheta = mid;
+                hi = mid;
+            }
+            else
+            {
+                lo = mid;
+            }
+        }
+
+        return (phi, bestTheta);
+    }
+    private double CalculateUtilizationForEDPTasks(List<ProjectTask> tasks)
+    {
+        double utilization = 0.0;
+        
+        foreach (ProjectTask task in tasks)
+        {
+            utilization += (double)task.Wcet/(double)task.Period; //sum(c_i/t_i)
+        }
+
+        return utilization;
+    }
+    
     // Helper: Determine if a task set is schedulable on a resource with given α and Δ (using demand bound test)
     private bool IsDemandSchedulable(List<ProjectTask> tasks, double alpha, double delta)
     {
@@ -258,7 +327,7 @@ public class AnalysisTool
         foreach (double t in GetCriticalTimes(tasks, horizon))
         {
             if (t < delta) continue; // before resource starts supplying, no supply (and ideally no demand due to no deadlines <= t)
-            double demand = ComputeDbf(tasks, t);
+            double demand = ComputeDBF(tasks, t);
             double supply = alpha * (t - delta);
             if (demand > supply + 1e-9)
             {
@@ -281,7 +350,7 @@ public class AnalysisTool
         // So we find the minimal right-hand side across all t in [0, horizon].
         foreach (double t in GetCriticalTimes(tasks, horizon))
         {
-            double dbf = ComputeDbf(tasks, t);
+            double dbf = ComputeDBF(tasks, t);
             // Rearranged condition: Δ <= t - dbf/α
             double rhs = t - (dbf / alpha);
             if (rhs < minOffset)
@@ -336,6 +405,29 @@ public class AnalysisTool
         }
         return timePoints;
     }
+    
+    private bool IsSchedulableWithPRM(List<ProjectTask> tasks, double Pi, double Theta)
+    {
+        double horizon = ComputeAnalysisHorizon(tasks);
+        foreach (double t in GetCriticalTimes(tasks, horizon))
+        {
+            double dbf = ComputeDBF(tasks, t);
+            double sbf = ComputePRMSupply(t, Pi, Theta);
+            if (dbf > sbf + 1e-9) return false;
+        }
+        return true;
+    }
+
+    private double ComputePRMSupply(double t, double Pi, double Theta)
+    {
+        if (t < Pi - Theta) return 0;
+
+        double n = Math.Floor((t - (Pi - Theta)) / Pi);
+        double rem = t - (Pi - Theta) - n * Pi;
+
+        return n * Theta + Math.Min(rem, Theta);
+    }
+
 
     // Helper: Compute least common multiple of two numbers
     private long Lcm(long a, long b)
